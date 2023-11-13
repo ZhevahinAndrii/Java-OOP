@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<candies xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema.xsd">
+    <candy ID="1">
+        <Name>Marshmallow Delight</Name>
+        <Energy>300</Energy>
+        <Type>Caramel</Type>
+<!--        <Ingredients>-->
+<!--            <Ingredient IName="Sugar" Amount="20.5"/>-->
+<!--            <Ingredient IName="Fructose" Amount="15.2"/>-->
+<!--        </Ingredients>-->
+        <Value>
+            <Proteins>1.2</Proteins>
+            <Fats>0.5</Fats>
+            <CarbonHydrates>25.0</CarbonHydrates>
+        </Value>
+        <Production>Roshen fabric</Production>
+    </candy>
+</candies>
