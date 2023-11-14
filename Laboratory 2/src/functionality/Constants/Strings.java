@@ -9,7 +9,7 @@ public class Strings {
     public static final String TYPE = "Type";
     public static final String INGREDIENTS = "Ingredients";
     public static final String INGREDIENT = "Ingredient";
-    public static final String INAME = "Iname";
+    public static final String INAME = "IName";
     public static final String AMOUNT = "Amount";
     public static final String VALUE = "Value";
     public static final String FATS = "Fats";

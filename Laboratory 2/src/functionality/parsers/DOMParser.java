@@ -3,6 +3,7 @@ package parsers;
 import Constants.Strings;
 import models.Candies;
 import models.Candy;
+import models.Ingredient;
 import models.Value;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -41,9 +42,21 @@ public class DOMParser {
         double energy = Double.parseDouble(getByTag(element,Strings.ENERGY));
         String type = getByTag(element,Strings.TYPE);
         String production = getByTag(element,Strings.PRODUCTION);
-
         Element valueElement = (Element) element.getElementsByTagName(Strings.VALUE).item(0);
-        return new Candy(id,name,energy,type,createValue(valueElement),production);
+        Element ingredientsElement = (Element) element.getElementsByTagName(Strings.INGREDIENTS).item(0);
+        return new Candy(id,name,energy,type,createValue(valueElement),production,createIngredients(ingredientsElement));
+    }
+    private List<Ingredient> createIngredients(Element element){
+        List<Ingredient> ingredients = new ArrayList<>();
+        NodeList nodelist = element.getElementsByTagName(Strings.INGREDIENT);
+        for(int i=0;i<nodelist.getLength();i++){
+            Element ingredient_element = (Element) nodelist.item(i);
+            String name = ingredient_element.getAttribute(Strings.INAME);
+            double amount = Double.parseDouble(ingredient_element.getAttribute(Strings.AMOUNT));
+            Ingredient ingredient = new Ingredient(name,amount);
+            ingredients.add(ingredient);
+        }
+        return ingredients;
     }
     private Value createValue(Element element){
         double proteins = Double.parseDouble(getByTag(element,Strings.PROTEINS));

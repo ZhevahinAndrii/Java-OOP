@@ -4,10 +4,11 @@
         <Name>Marshmallow Delight</Name>
         <Energy>300</Energy>
         <Type>Caramel</Type>
-<!--        <Ingredients>-->
-<!--            <Ingredient IName="Sugar" Amount="20.5"/>-->
-<!--            <Ingredient IName="Fructose" Amount="15.2"/>-->
-<!--        </Ingredients>-->
+        <Ingredients>
+            <Ingredient IName="Sugar" Amount="20.5"/>
+            <Ingredient IName="Fructose" Amount="15.2"/>
+
+        </Ingredients>
         <Value>
             <Proteins>1.2</Proteins>
             <Fats>0.5</Fats>

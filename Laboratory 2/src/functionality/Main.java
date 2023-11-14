@@ -5,6 +5,7 @@ import parsers.StAXParser;
 import validation.XMLSchemaValidation;
 public class Main {
     public static void main(String[] args) throws Exception{
+        XMLSchemaValidation.apply("C:\\OOP Java\\Laboratory 2\\src\\resources\\xml\\data.xml","C:\\OOP Java\\Laboratory 2\\src\\resources\\xml\\schema.xsd");
         var domParser = new DOMParser();
         Candies candies =domParser.parseXml("C:\\OOP Java\\Laboratory 2\\src\\resources\\xml\\data.xml");
         System.out.println(candies);
@@ -16,6 +17,6 @@ public class Main {
         SAXDocumentParser saxDocumentParser = new SAXDocumentParser();
         Candies candies3 =saxDocumentParser.parseXml("C:\\OOP Java\\Laboratory 2\\src\\resources\\xml\\data.xml");
         System.out.println(candies3);
-        XMLSchemaValidation.apply("C:\\OOP Java\\Laboratory 2\\src\\resources\\xml\\data.xml","C:\\OOP Java\\Laboratory 2\\src\\resources\\xml\\schema.xsd");
+
     }
 }

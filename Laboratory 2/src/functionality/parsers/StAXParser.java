@@ -13,37 +13,40 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class StAXParser {
-    public Candies parseXml(String xmlFilePath) throws XMLStreamException, FileNotFoundException{
+    public Candies parseXml(String xmlFilePath) throws XMLStreamException, FileNotFoundException {
         File xmlFile = new File(xmlFilePath);
 
         XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
 
         CandyHandler candyHandler = new CandyHandler();
-        XMLEventReader reader  = xmlInputFactory.createXMLEventReader(new FileInputStream(xmlFile));
+        XMLEventReader reader = xmlInputFactory.createXMLEventReader(new FileInputStream(xmlFile));
 
-        while(reader.hasNext()){
+        while (reader.hasNext()) {
             XMLEvent nextXMLEvent = reader.nextEvent();
-            if(nextXMLEvent.isStartElement()){
+            if (nextXMLEvent.isStartElement()) {
                 StartElement startElement = nextXMLEvent.asStartElement();
-                nextXMLEvent = reader.nextEvent();
-                String name = startElement.getName().getLocalPart();
-                if(nextXMLEvent.isCharacters()){
-                    var attributesList = new ArrayList<Attribute>();
-                    var iter = startElement.getAttributes();
-                    while(iter.hasNext()){
-                        attributesList.add(iter.next());
-                    }
-                    var attributeMap = new HashMap<String,String>();
 
-                    for(var attribute:attributesList){
-                        attributeMap.put(attribute.getName().getLocalPart(),attribute.getValue());
-                    }
-                    candyHandler.setField(name,nextXMLEvent.asCharacters().getData(),attributeMap);
+                String name = startElement.getName().getLocalPart();
+                Map<String, String> attributeMap = new HashMap<>();
+                Iterator<Attribute> attributes = startElement.getAttributes();
+                while (attributes.hasNext()) {
+                    Attribute attribute = attributes.next();
+                    attributeMap.put(attribute.getName().getLocalPart(), attribute.getValue());
+                }
+
+                nextXMLEvent = reader.nextEvent();
+                if (nextXMLEvent.isCharacters()) {
+                    candyHandler.setField(name, nextXMLEvent.asCharacters().getData(), attributeMap);
+                }
+                else if(nextXMLEvent.isEndElement()){
+                    candyHandler.setField(name,"",attributeMap);
                 }
             }
         }
-        return new Candies(candyHandler.getCandiesList());
+            return new Candies(candyHandler.getCandiesList());
     }
 }
